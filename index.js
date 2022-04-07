@@ -4,17 +4,19 @@
     let $slidesWindow = $('.slidesWindow')
 
     function playNextSlide() {
-        $slides.css({
-            transform: `translateX(${-400 * (currentIndex + 1)}px)`
-        })
-        currentIndex += 1
+        playSlideByIndex(currentIndex + 1)
     }
 
     function playPreviousSlide() {
+        playSlideByIndex(currentIndex - 1)
+    }
+
+    function playSlideByIndex(index) {
         $slides.css({
-            transform: `translateX(${-400 * (currentIndex - 1)}px)`
+            transform: `translateX(${-400 * (index)}px)`
         })
-        currentIndex -= 1
+        currentIndex = index
+        return index
     }
 
     buttonNext.onClick = function() {
