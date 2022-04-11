@@ -29,7 +29,7 @@
         }, 3000)
     }
 
-    let timeId = autoPlay()
+    let timerId = autoPlay()
 
     let playNext = () => {
         playSlideByIndex(currentIndex + 1)
@@ -42,7 +42,7 @@
         window.clearInterval(timeId)
     }
     let resetTimer = () => {
-        timeId = autoPlay()
+        timerId = autoPlay()
     }
 
     function bindEvents() {
