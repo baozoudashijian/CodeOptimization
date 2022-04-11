@@ -26,29 +26,35 @@
         playNextSlide()
     }, 3000)
 
-    let onClickNext = () => {
+    let playNext = () => {
         playSlideByIndex(currentIndex + 1)
     }
-    let onClickPrevious = () => {
+    let playPrevious = () => {
         playSlideByIndex(currentIndex - 1)
     }
 
-    let onEnterWindow = () => {
+    let clearTimer = () => {
         window.clearInterval(timeId)
     }
-    let onLeaveWindow = () => {
+    let resetTimer = () => {
         timeId = setInterval(() => {
             playNextSlide()
         }, 3000)
     }
 
+    function bindEvents() {
+        let events = [
+            { el: buttonNext, event: 'click', fn: playNext },
+            { el: buttonPrevous, event: 'click', fn: playPrevious },
+            { el: $slidesWindow, event: 'mouseenter', fn: clearTimer },
+            { el: $slidesWindow, event: 'mouseleave', fn: resetTimer },
+        ]
+    
+        events.forEach((eventObject) => {
+            $(eventObject.el).on(eventObject.event, eventObject.fn)
+        })
+    }
+    bindEvents()
 
 
-    $(buttonNext).on('click', onClickNext)
-
-    $(buttonPrevous).on('click', onClickPrevious)
-
-    $slidesWindow.on('mouseenter', onEnterWindow)
-
-    $slidesWindow.on('mouseleave', onLeaveWindow)
 })
