@@ -5,15 +5,20 @@
 
 
     function playSlideByIndex(index) {
+        index = fixIndex(index)
+        $slides.css({
+            transform: `translateX(${-400 * (index)}px)`
+        })
+        currentIndex = index
+        return index
+    }
+
+    function fixIndex(index) {
         if (index < 0) {
             index = 4
         } else if (index > 4) {
             index = 0
         }
-        $slides.css({
-            transform: `translateX(${-400 * (index)}px)`
-        })
-        currentIndex = index
         return index
     }
 
