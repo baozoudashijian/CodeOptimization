@@ -22,25 +22,33 @@
         return index
     }
 
-    buttonNext.onClick = function () {
-        playSlideByIndex(currentIndex + 1)
-    }
-
-    buttonPrevous.onClick = function () {
-        playSlideByIndex(currentIndex - 1)
-    }
-
     let timeId = setInterval(() => {
         playNextSlide()
     }, 3000)
 
-    $slidesWindow.on('mouseenter', function () {
-        window.clearInterval(timeId)
-    })
+    let onClickNext = () => {
+        playSlideByIndex(currentIndex + 1)
+    }
+    let onClickPrevious = () => {
+        playSlideByIndex(currentIndex - 1)
+    }
 
-    $slidesWindow.on('mouseleave', function () {
+    let onEnterWindow = () => {
+        window.clearInterval(timeId)
+    }
+    let onLeaveWindow = () => {
         timeId = setInterval(() => {
             playNextSlide()
         }, 3000)
-    })
+    }
+
+
+
+    $(buttonNext).on('click', onClickNext)
+
+    $(buttonPrevous).on('click', onClickPrevious)
+
+    $slidesWindow.on('mouseenter', onEnterWindow)
+
+    $slidesWindow.on('mouseleave', onLeaveWindow)
 })
