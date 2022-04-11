@@ -2,6 +2,7 @@
     let currentIndex = 0;
     let $slides = $('.slides')
     let $slidesWindow = $('.slidesWindow')
+    let timerId
 
 
     function playSlideByIndex(index) {
@@ -22,9 +23,13 @@
         return index
     }
 
-    let timeId = setInterval(() => {
-        playNextSlide()
-    }, 3000)
+    function autoPlay() {
+        return setInterval(() => {
+            playNextSlide(currentIndex + 1)
+        }, 3000)
+    }
+
+    let timeId = autoPlay()
 
     let playNext = () => {
         playSlideByIndex(currentIndex + 1)
@@ -37,9 +42,7 @@
         window.clearInterval(timeId)
     }
     let resetTimer = () => {
-        timeId = setInterval(() => {
-            playNextSlide()
-        }, 3000)
+        timeId = autoPlay()
     }
 
     function bindEvents() {
