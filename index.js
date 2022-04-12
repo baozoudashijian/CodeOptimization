@@ -7,12 +7,14 @@
         $buttonNext: $('.buttonNext'),
         $buttonPrevous: $('.buttonPrevous'),
         timerId: null,
-        events: [
-            { el: slide.$buttonNext, event: 'click', fn: slide.playNext },
-            { el: slide.$buttonPrevous, event: 'click', fn: slide.playPrevious },
-            { el: slide.$slidesWindow, event: 'mouseenter', fn: slide.clearTimer },
-            { el: slide.$slidesWindow, event: 'mouseleave', fn: slide.resetTimer },
-        ],
+        events() {
+            return [
+                { el: this.$buttonNext, event: 'click', fn: this.playNext },
+                { el: this.$buttonPrevous, event: 'click', fn: this.playPrevious },
+                { el: this.$slidesWindow, event: 'mouseenter', fn: this.clearTimer },
+                { el: this.$slidesWindow, event: 'mouseleave', fn: this.resetTimer },
+            ]
+        },
         playNext: () => {
             // 调用这些函数前面都是slide
             this.playSlideByIndex(this.currentIndex + 1)
@@ -30,7 +32,7 @@
             this.timerId = this.autoPlay()
         },
         bindEvents: () => {
-            this.events.forEach((eventObject) => {
+            this.events().forEach((eventObject) => {
                 $(eventObject.el).on(eventObject.event, eventObject.fn)
             })
         },
