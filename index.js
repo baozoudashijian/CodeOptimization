@@ -14,17 +14,20 @@
             { el: slide.$slidesWindow, event: 'mouseleave', fn: slide.resetTimer },
         ],
         playNext: () => {
-            slide.playSlideByIndex(slide.currentIndex + 1)
+            // 调用这些函数前面都是slide
+            this.playSlideByIndex(this.currentIndex + 1)
         },
         playPrevious: () => {
-            slide.playSlideByIndex(slide.currentIndex - 1)
+            // 调用这些函数前面都是slide
+            this.playSlideByIndex(this.currentIndex - 1)
         },
-
         clearTimer: () => {
-            window.clearInterval(slide.timerId)
+            // 调用这些函数前面都是slide
+            window.clearInterval(this.timerId)
         },
         resetTimer: () => {
-            slide.timerId = slide.autoPlay()
+            // 调用这些函数前面都是slide
+            this.timerId = this.autoPlay()
         },
         bindEvents: () => {
             this.events.forEach((eventObject) => {
