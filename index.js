@@ -27,16 +27,16 @@
             slide.timerId = slide.autoPlay()
         },
         bindEvents: () => {
-            slide.events.forEach((eventObject) => {
+            this.events.forEach((eventObject) => {
                 $(eventObject.el).on(eventObject.event, eventObject.fn)
             })
         },
         playSlideByIndex(index) {
-            index = slide.fixIndex(index)
-            slide.$slides.css({
+            index = this.fixIndex(index)
+            this.$slides.css({
                 transform: `translateX(${-400 * (index)}px)`
             })
-            slide.currentIndex = index
+            this.currentIndex = index
             return index
         },
         fixIndex(index) {
@@ -48,15 +48,16 @@
             return index
         },
         autoPlay() {
+            // 箭头函数不管this，如果式function那this就是window
             return setInterval(() => {
-                playSlideByIndex(slide.currentIndex + 1)
+                this.playSlideByIndex(this.currentIndex + 1)
             }, 3000)
         },
         init() {
-            slide.timerId = slide.autoPlay()
-            slide.bindEvents()
+            this.timerId = this.autoPlay() // this.autoPlay === this.autoPlay.call(slide)
+            this.bindEvents() // 2---------this.bindEvents === slide.bindEvents.call(slide)
         },
     }
 
-    slide.init() // slide.init.call(init)
+    slide.init() // slide.init.call(slide) // 1---------隐式的传入this
 })
