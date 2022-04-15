@@ -62,6 +62,8 @@
             this.timerId = this.autoPlay() // this.autoPlay === this.autoPlay.call(slide)
             this.bindEvents() // 2---------this.bindEvents === slide.bindEvents.call(slide)
         },
+
+        // 学习签到
     }
 
     slide.init() // slide.init.call(slide) // 1---------隐式的传入this
